@@ -1,0 +1,79 @@
+<!--
+  ~   Copyright 2020 The Android Open Source Project
+  ~
+  ~   Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~   Unless required by applicable law or agreed to in writing, software
+  ~   distributed under the License is distributed on an "AS IS" BASIS,
+  ~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~   See the License for the specific language governing permissions and
+  ~   limitations under the License.
+  ~
+  -->
+<resources>
+    <string name="app_name">ApiPet</string>
+    <string name="app_tagline">App based in jetsurvey</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_in_create_account">Sign in or create an account</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="user_continue">Continue</string>
+    <string name="create_account">Create account</string>
+    <string name="terms_and_conditions">By continuing, you agree to our Terms of Service. We’ll
+        handle your data according to our Privacy Policy.</string>
+    <string name="feature_not_available">Feature not available</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="done">Done</string>
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+
+    <!-- survey-->
+    <string name="question_count">\u00A0of %d</string>
+    <string name="select_one">Select one.</string>
+    <string name="select_all">Select all that apply.</string>
+    <string name="select_date">Write a message</string>
+
+    <!-- question 1-->
+    <string name="in_my_free_time">Do you like the meme cats?</string>
+    <string name="read">Love them!</string>
+    <string name="work_out">Like them </string>
+    <string name="draw">Indifferent </string>
+    <string name="play_games">Not a fan</string>
+    <string name="dance">Allergic </string>
+    <string name="watch_movies">Never had one</string>
+
+    <!-- question 2 -->
+    <string name="pick_superhero">Select the mood of your cat meme:</string>
+    <string name="spark">Cute</string>
+    <string name="lenz">Angry</string>
+    <string name="bugchaos">Sad</string>
+    <string name="frag">Random</string>
+
+    <!-- question 3 -->
+    <string name="takeaway">Write the message you want your cat meme to have</string>
+
+    <!-- question 4-->
+    <string name="selfies">How do you feel about with cat meme 🤳?</string>
+
+    <!-- question 5 -->
+    <string name="selfie_skills">Show off your cat meme skills!</string>
+    <string name="add_photo">ADD CAT MEME</string>
+    <string name="retake_photo">RETAKE CAT MEME</string>
+
+    <string name="survey_result_title">Congratulations</string>
+    <string name="survey_result_subtitle">You are now part of the wonderful world of Cat Memes! We are thrilled to have you on board. 🐱</string>
+    <string name="survey_result_description">Thank you for joining the fun in our cat meme app. We hope you enjoy every minute of your time here. We are always looking for ways to bring a smile to our users, and you are part of our feline community.</string>
+    <string name="strongly_dislike">Strongly\nDislike</string>
+    <string name="strongly_like">Strongly\nLike</string>
+    <string name="neutral">Neutral</string>
+</resources>
