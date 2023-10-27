@@ -17,6 +17,7 @@
 package com.example.compose.jetsurvey.survey.question
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,6 +35,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.res.stringResource
@@ -41,11 +47,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose.jetsurvey.R
+import com.example.compose.jetsurvey.signinsignup.ImageCatApiService
+import com.example.compose.jetsurvey.signinsignup.ImageCatData
 import com.example.compose.jetsurvey.survey.QuestionWrapper
 import com.example.compose.jetsurvey.survey.simpleDateFormatPattern
 import com.example.compose.jetsurvey.theme.JetsurveyTheme
 import com.example.compose.jetsurvey.theme.slightlyDeemphasizedAlpha
 import com.example.compose.jetsurvey.util.getDefaultDateInMillis
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
@@ -69,37 +79,6 @@ fun DateQuestion(
         val dateString = dateFormat.format(dateInMillis ?: getDefaultDateInMillis())
 
 
-        OutlinedTextField(
-            value = emailState.text,
-            onValueChange = {
-                emailState.text = it
-            },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.email),
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .onFocusChanged { focusState ->
-                    emailState.onFocusChange(focusState.isFocused)
-                    if (!focusState.isFocused) {
-                        emailState.enableShowErrors()
-                    }
-                },
-            textStyle = MaterialTheme.typography.bodyMedium,
-            isError = emailState.showErrors(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = imeAction,
-                keyboardType = KeyboardType.Email
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    onImeAction()
-                }
-            ),
-        )
         Button(
             onClick = onClick,
             colors = ButtonDefaults.buttonColors(

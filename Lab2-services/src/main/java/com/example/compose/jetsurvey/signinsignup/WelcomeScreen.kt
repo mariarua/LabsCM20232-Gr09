@@ -18,6 +18,7 @@ package com.example.compose.jetsurvey.signinsignup
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -34,6 +35,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +54,8 @@ import com.example.compose.jetsurvey.R
 import com.example.compose.jetsurvey.theme.JetsurveyTheme
 import com.example.compose.jetsurvey.theme.stronglyDeemphasizedAlpha
 import com.example.compose.jetsurvey.util.supportWideScreen
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun WelcomeScreen(
@@ -59,7 +63,25 @@ fun WelcomeScreen(
     onSignInAsGuest: () -> Unit,
 ) {
     var showBranding by remember { mutableStateOf(true) }
+    var imageCats: List<ImageCatData>? by remember { mutableStateOf(null) }
+    //cargar datos de la api
+    var hasLoadedDataImageCat by remember { mutableStateOf(false) }
 
+    LaunchedEffect(Unit) {
+        if (!hasLoadedDataImageCat) {
+            withContext( context = Dispatchers.IO) {
+                try {
+
+                    val loadedCountries = ImageCatApiService.imageCatsApi.getAllCats()
+                    imageCats = loadedCountries
+                    hasLoadedDataImageCat = true
+                    Log.d("API Response","Prueba de log")
+                } catch (e: Exception) {
+                    Log.e("API Error", e.message ?: "Unknown error")
+                }
+            }
+        }
+    }
     Surface(modifier = Modifier.supportWideScreen()) {
         Column(
             modifier = Modifier
@@ -145,7 +167,11 @@ private fun SignInCreateAccount(
     val emailState by rememberSaveable(stateSaver = EmailStateSaver) {
         mutableStateOf(EmailState())
     }
+
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+
+
+
         Text(
             text = stringResource(id = R.string.sign_in_create_account),
             style = MaterialTheme.typography.bodyMedium,

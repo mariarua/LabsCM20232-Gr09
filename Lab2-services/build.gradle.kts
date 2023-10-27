@@ -77,7 +77,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
 
     implementation(libs.google.android.material)
-
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation(libs.androidx.compose.foundation.layout)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.iconsExtended)
