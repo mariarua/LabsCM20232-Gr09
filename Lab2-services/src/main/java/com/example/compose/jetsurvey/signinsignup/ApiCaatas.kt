@@ -16,19 +16,15 @@ data class ImageCatData(
     )
 
 interface ImageCatsApi {
-    @GET("cats")
+    @GET("api/cats")
     suspend fun getAllCats(): List<ImageCatData>
 
-    @GET("cat/{tag}")
-    suspend fun getCatByTag(@Path("tag") tag: String): ImageCatData
 
     @GET("cat/{tag}/says/{text}")
     suspend fun getCatWithText(@Path("tag") tag: String, @Path("text") text: String): ImageCatData
 
     @GET("cat/gif/says/{text}")
     suspend fun getCatGifWithText(@Path("text") text: String): ImageCatData
-
-
 
 }
 

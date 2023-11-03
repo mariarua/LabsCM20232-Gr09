@@ -17,8 +17,21 @@
 package com.example.compose.jetsurvey.survey
 
 import android.net.Uri
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.compose.jetsurvey.R
 import com.example.compose.jetsurvey.survey.question.DateQuestion
 import com.example.compose.jetsurvey.survey.question.MultipleChoiceQuestion
@@ -71,36 +84,46 @@ fun SuperheroQuestion(
     )
 }
 
+
 @Composable
-fun TakeawayQuestion(
-    dateInMillis: Long?,
-    onClick: () -> Unit,
+fun TextQuestion(
+    text: String?,
+    onTextChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    DateQuestion(
-        titleResourceId = R.string.takeaway,
-        directionsResourceId = R.string.select_date,
-        dateInMillis = dateInMillis,
-        onClick = onClick,
-        modifier = modifier,
-    )
+    Column(
+        modifier = modifier.padding(16.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "What text do you want for your cat meme?",
+            modifier = Modifier.padding(bottom = 8.dp) // Add padding between label and input
+        )
+        TextField(
+            value = text ?: "",
+            onValueChange = onTextChanged,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }
 
 @Composable
-fun FeelingAboutSelfiesQuestion(
-    value: Float?,
-    onValueChange: (Float) -> Unit,
+fun TakeawayQuestion(
+    text: String?,
+    onTextChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    SliderQuestion(
-        titleResourceId = R.string.selfies,
-        value = value,
-        onValueChange = onValueChange,
-        startTextResource = R.string.strongly_dislike,
-        neutralTextResource = R.string.neutral,
-        endTextResource = R.string.strongly_like,
-        modifier = modifier,
-    )
+    Column(
+        modifier = Modifier.fillMaxSize().padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        TextQuestion(
+            text = text,
+            onTextChanged = onTextChanged,
+            modifier = modifier
+        )
+    }
 }
 
 @Composable
@@ -118,3 +141,25 @@ fun TakeSelfieQuestion(
         modifier = modifier,
     )
 }
+@Composable
+fun FeelingAboutSelfiesQuestion(
+    value: Float?,
+    onValueChange: (Float) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    SliderQuestion(
+        titleResourceId = R.string.selfies,
+        value = value,
+        onValueChange = onValueChange,
+        startTextResource = R.string.strongly_dislike,
+        neutralTextResource = R.string.neutral,
+        endTextResource = R.string.strongly_like,
+        modifier = modifier,
+    )
+}
+
+
+
+
+
+

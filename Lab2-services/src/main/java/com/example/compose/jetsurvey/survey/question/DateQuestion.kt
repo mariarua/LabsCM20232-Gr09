@@ -109,18 +109,4 @@ fun DateQuestion(
     }
 }
 
-@Preview(name = "Light", uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun DateQuestionPreview() {
-    JetsurveyTheme {
-        Surface {
-            DateQuestion(
-                titleResourceId = R.string.takeaway,
-                directionsResourceId = R.string.select_date,
-                dateInMillis = 1672560000000, // 2023-01-01
-                onClick = {},
-            )
-        }
-    }
-}
+

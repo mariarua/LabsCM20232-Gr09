@@ -106,27 +106,16 @@ fun SurveyRoute(
                 )
 
                 SurveyQuestion.LAST_TAKEAWAY -> {
-                    val supportFragmentManager =
-                        LocalContext.current.findActivity().supportFragmentManager
+                    val supportFragmentManager = LocalContext.current.findActivity().supportFragmentManager
                     TakeawayQuestion(
-                        dateInMillis = viewModel.takeawayResponse,
-                        onClick = {
-                            showTakeawayDatePicker(
-                                date = viewModel.takeawayResponse,
-                                supportFragmentManager = supportFragmentManager,
-                                onDateSelected = viewModel::onTakeawayResponse
-                            )
-                        },
+                        text = viewModel.takeawayResponse?.toString() ?: "", // Convertir Long? a String
+                        onTextChanged = { newText -> viewModel.onTakeawayResponse(newText) },
                         modifier = modifier,
                     )
                 }
 
-                SurveyQuestion.FEELING_ABOUT_SELFIES ->
-                    FeelingAboutSelfiesQuestion(
-                        value = viewModel.feelingAboutSelfiesResponse,
-                        onValueChange = viewModel::onFeelingAboutSelfiesResponse,
-                        modifier = modifier,
-                    )
+
+
 
                 SurveyQuestion.TAKE_SELFIE -> TakeSelfieQuestion(
                     imageUri = viewModel.selfieUri,
@@ -134,6 +123,13 @@ fun SurveyRoute(
                     onPhotoTaken = viewModel::onSelfieResponse,
                     modifier = modifier,
                 )
+
+                SurveyQuestion.FEELING_ABOUT_SELFIES ->
+                    FeelingAboutSelfiesQuestion(
+                        value = viewModel.feelingAboutSelfiesResponse,
+                        onValueChange = viewModel::onFeelingAboutSelfiesResponse,
+                        modifier = modifier,
+                    )
             }
         }
     }

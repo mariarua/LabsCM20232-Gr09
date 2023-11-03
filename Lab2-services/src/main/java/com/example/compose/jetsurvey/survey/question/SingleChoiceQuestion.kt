@@ -49,6 +49,10 @@ import androidx.compose.ui.unit.dp
 import com.example.compose.jetsurvey.R
 import com.example.compose.jetsurvey.survey.QuestionWrapper
 
+
+object pruebita {
+    var pruebita: String = ""
+}
 @Composable
 fun SingleChoiceQuestion(
     @StringRes titleResourceId: Int,
@@ -146,7 +150,8 @@ fun SingleChoiceQuestionPreview() {
         directionsResourceId = R.string.select_one,
         possibleAnswers = possibleAnswers,
         selectedAnswer = selectedAnswer,
-        onOptionSelected = { selectedAnswer = it },
+        onOptionSelected = { selectedAnswer = it
+                           pruebita.pruebita = selectedAnswer.toString()},
     )
 }
 

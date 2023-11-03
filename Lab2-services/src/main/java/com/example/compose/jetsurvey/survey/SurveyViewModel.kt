@@ -33,8 +33,8 @@ class SurveyViewModel(
         SurveyQuestion.FREE_TIME,
         SurveyQuestion.SUPERHERO,
         SurveyQuestion.LAST_TAKEAWAY,
-        SurveyQuestion.FEELING_ABOUT_SELFIES,
         SurveyQuestion.TAKE_SELFIE,
+        SurveyQuestion.FEELING_ABOUT_SELFIES,
     )
 
     private var questionIndex = 0
@@ -49,8 +49,8 @@ class SurveyViewModel(
     val superheroResponse: Superhero?
         get() = _superheroResponse.value
 
-    private val _takeawayResponse = mutableStateOf<Long?>(null)
-    val takeawayResponse: Long?
+    private val _takeawayResponse = mutableStateOf<String?>(null)
+    val takeawayResponse: String?
         get() = _takeawayResponse.value
 
     private val _feelingAboutSelfiesResponse = mutableStateOf<Float?>(null)
@@ -118,8 +118,8 @@ class SurveyViewModel(
         _isNextEnabled.value = getIsNextEnabled()
     }
 
-    fun onTakeawayResponse(timestamp: Long) {
-        _takeawayResponse.value = timestamp
+    fun onTakeawayResponse(texto: String) {
+        _takeawayResponse.value = texto
         _isNextEnabled.value = getIsNextEnabled()
     }
 
@@ -140,8 +140,9 @@ class SurveyViewModel(
             SurveyQuestion.FREE_TIME -> _freeTimeResponse.isNotEmpty()
             SurveyQuestion.SUPERHERO -> _superheroResponse.value != null
             SurveyQuestion.LAST_TAKEAWAY -> _takeawayResponse.value != null
-            SurveyQuestion.FEELING_ABOUT_SELFIES -> _feelingAboutSelfiesResponse.value != null
             SurveyQuestion.TAKE_SELFIE -> _selfieUri.value != null
+            SurveyQuestion.FEELING_ABOUT_SELFIES -> _feelingAboutSelfiesResponse.value != null
+
         }
     }
 
@@ -172,8 +173,8 @@ enum class SurveyQuestion {
     FREE_TIME,
     SUPERHERO,
     LAST_TAKEAWAY,
-    FEELING_ABOUT_SELFIES,
     TAKE_SELFIE,
+    FEELING_ABOUT_SELFIES,
 }
 
 data class SurveyScreenData(
