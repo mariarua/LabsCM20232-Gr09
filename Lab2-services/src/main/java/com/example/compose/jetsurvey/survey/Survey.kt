@@ -125,7 +125,6 @@ fun TextQuestion(
                 onTextChanged(it)
                 GeneradorMeme.text = textFieldValue
                 GeneradorMeme.uri = "https://cataas.com/cat/${GeneradorMeme.tag.lowercase()}/says/${encodeSpacesToUrl(GeneradorMeme.text)}"
-                Log.d("API", GeneradorMeme.uri)
             },
             modifier = Modifier.fillMaxWidth()
         )

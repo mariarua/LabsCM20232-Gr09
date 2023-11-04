@@ -36,8 +36,6 @@ class SavePhoto : IntentService("SavePhoto") {
                     val imageFile = File(storageDir, "Meme-${SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(
                         Date()
                     )}.jpg")
-                    Log.d("UBICACIÓN", storageDir.toString())
-                    Log.d("UBICACIÓN", imageFile.toString())
                     val outputStream = FileOutputStream(imageFile)
                     outputStream.write(imageBytes)
                     outputStream.close()
