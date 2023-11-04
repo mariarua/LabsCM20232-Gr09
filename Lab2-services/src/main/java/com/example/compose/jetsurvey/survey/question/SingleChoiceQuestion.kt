@@ -41,6 +41,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -50,8 +51,10 @@ import com.example.compose.jetsurvey.R
 import com.example.compose.jetsurvey.survey.QuestionWrapper
 
 
-object pruebita {
-    var pruebita: String = ""
+object GeneradorMeme {
+    var tag: String = ""
+    var text: String = ""
+    var uri: String = ""
 }
 @Composable
 fun SingleChoiceQuestion(
@@ -62,6 +65,7 @@ fun SingleChoiceQuestion(
     onOptionSelected: (Superhero) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var context = LocalContext.current
     QuestionWrapper(
         titleResourceId = titleResourceId,
         directionsResourceId = directionsResourceId,
@@ -74,7 +78,8 @@ fun SingleChoiceQuestion(
                 text = stringResource(id = it.stringResourceId),
                 imageResourceId = it.imageResourceId,
                 selected = selected,
-                onOptionSelected = { onOptionSelected(it) }
+                onOptionSelected = { onOptionSelected(it)
+                GeneradorMeme.tag = context.getString(it.stringResourceId)}
             )
         }
     }
@@ -150,8 +155,7 @@ fun SingleChoiceQuestionPreview() {
         directionsResourceId = R.string.select_one,
         possibleAnswers = possibleAnswers,
         selectedAnswer = selectedAnswer,
-        onOptionSelected = { selectedAnswer = it
-                           pruebita.pruebita = selectedAnswer.toString()},
+        onOptionSelected = { selectedAnswer = it}
     )
 }
 

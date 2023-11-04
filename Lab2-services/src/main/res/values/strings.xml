@@ -68,7 +68,7 @@
     <!-- question 5 -->
     <string name="selfie_skills">Now, you can see you meme</string>
     <string name="add_photo">ADD CAT MEME</string>
-    <string name="retake_photo">RETAKE CAT MEME</string>
+    <string name="retake_photo">GENERATE A NEW MEME AND SAVE IT IN YOUR PHONE</string>
 
     <string name="survey_result_title">Congratulations</string>
     <string name="survey_result_subtitle">You are now part of the wonderful world of Cat Memes! We are thrilled to have you on board. 🐱</string>

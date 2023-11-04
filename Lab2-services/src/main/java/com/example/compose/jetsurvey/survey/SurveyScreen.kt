@@ -247,7 +247,7 @@ fun SurveyBottomBar(
                         .weight(1f)
                         .height(48.dp),
                     onClick = onDonePressed,
-                    enabled = isNextButtonEnabled,
+                    enabled = true,
                 ) {
                     Text(text = stringResource(id = R.string.done))
                 }

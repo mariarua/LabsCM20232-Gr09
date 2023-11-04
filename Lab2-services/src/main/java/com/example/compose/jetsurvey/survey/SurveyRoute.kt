@@ -124,12 +124,12 @@ fun SurveyRoute(
                     modifier = modifier,
                 )
 
-                SurveyQuestion.FEELING_ABOUT_SELFIES ->
-                    FeelingAboutSelfiesQuestion(
-                        value = viewModel.feelingAboutSelfiesResponse,
-                        onValueChange = viewModel::onFeelingAboutSelfiesResponse,
-                        modifier = modifier,
-                    )
+                //SurveyQuestion.FEELING_ABOUT_SELFIES ->
+                  //  FeelingAboutSelfiesQuestion(
+                    //    value = viewModel.feelingAboutSelfiesResponse,
+                      //  onValueChange = viewModel::onFeelingAboutSelfiesResponse,
+                       // modifier = modifier,
+                    //)
             }
         }
     }

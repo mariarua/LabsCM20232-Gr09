@@ -63,25 +63,7 @@ fun WelcomeScreen(
     onSignInAsGuest: () -> Unit,
 ) {
     var showBranding by remember { mutableStateOf(true) }
-    var imageCats: List<ImageCatData>? by remember { mutableStateOf(null) }
-    //cargar datos de la api
-    var hasLoadedDataImageCat by remember { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) {
-        if (!hasLoadedDataImageCat) {
-            withContext( context = Dispatchers.IO) {
-                try {
-
-                    val loadedCountries = ImageCatApiService.imageCatsApi.getAllCats()
-                    imageCats = loadedCountries
-                    hasLoadedDataImageCat = true
-                    Log.d("API Response","Prueba de log")
-                } catch (e: Exception) {
-                    Log.e("API Error", e.message ?: "Unknown error")
-                }
-            }
-        }
-    }
     Surface(modifier = Modifier.supportWideScreen()) {
         Column(
             modifier = Modifier

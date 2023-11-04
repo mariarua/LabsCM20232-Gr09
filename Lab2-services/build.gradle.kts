@@ -88,6 +88,8 @@ dependencies {
 
     implementation(libs.accompanist.permissions)
     implementation(libs.accompanist.systemuicontroller)
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+
 
     implementation(libs.coil.kt.compose)
 

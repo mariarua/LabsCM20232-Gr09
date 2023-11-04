@@ -17,6 +17,7 @@
 package com.example.compose.jetsurvey.survey
 
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +27,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
@@ -33,12 +39,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose.jetsurvey.R
+import com.example.compose.jetsurvey.signinsignup.ImageCatApiService
+import com.example.compose.jetsurvey.signinsignup.ImageCatData
 import com.example.compose.jetsurvey.survey.question.DateQuestion
+import com.example.compose.jetsurvey.survey.question.GeneradorMeme
 import com.example.compose.jetsurvey.survey.question.MultipleChoiceQuestion
 import com.example.compose.jetsurvey.survey.question.PhotoQuestion
 import com.example.compose.jetsurvey.survey.question.SingleChoiceQuestion
 import com.example.compose.jetsurvey.survey.question.SliderQuestion
 import com.example.compose.jetsurvey.survey.question.Superhero
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.net.URLEncoder
+
+var textTag: String? = null
+var textMeme: String? = null
 
 @Composable
 fun FreeTimeQuestion(
@@ -70,6 +85,7 @@ fun SuperheroQuestion(
     modifier: Modifier = Modifier,
 ) {
     SingleChoiceQuestion(
+
         titleResourceId = R.string.pick_superhero,
         directionsResourceId = R.string.select_one,
         possibleAnswers = listOf(
@@ -91,6 +107,9 @@ fun TextQuestion(
     onTextChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+
+    var textFieldValue by remember { mutableStateOf(text ?: "") }
+
     Column(
         modifier = modifier.padding(16.dp),
         verticalArrangement = Arrangement.Center
@@ -100,13 +119,22 @@ fun TextQuestion(
             modifier = Modifier.padding(bottom = 8.dp) // Add padding between label and input
         )
         TextField(
-            value = text ?: "",
-            onValueChange = onTextChanged,
+            value = textFieldValue,
+            onValueChange = {
+                textFieldValue = it
+                onTextChanged(it)
+                GeneradorMeme.text = textFieldValue
+                GeneradorMeme.uri = "https://cataas.com/cat/${GeneradorMeme.tag.lowercase()}/says/${encodeSpacesToUrl(GeneradorMeme.text)}"
+                Log.d("API", GeneradorMeme.uri)
+            },
             modifier = Modifier.fillMaxWidth()
         )
     }
 }
 
+fun encodeSpacesToUrl(input: String): String {
+    return input.replace(" ", "%20")
+}
 @Composable
 fun TakeawayQuestion(
     text: String?,
@@ -114,7 +142,9 @@ fun TakeawayQuestion(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -135,12 +165,13 @@ fun TakeSelfieQuestion(
 ) {
     PhotoQuestion(
         titleResourceId = R.string.selfie_skills,
-        imageUri = imageUri,
+        imageUri = Uri.parse(GeneradorMeme.uri),
         getNewImageUri = getNewImageUri,
         onPhotoTaken = onPhotoTaken,
         modifier = modifier,
     )
 }
+
 @Composable
 fun FeelingAboutSelfiesQuestion(
     value: Float?,

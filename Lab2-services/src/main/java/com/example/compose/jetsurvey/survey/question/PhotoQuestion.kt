@@ -16,6 +16,7 @@
 
 package com.example.compose.jetsurvey.survey.question
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -50,10 +51,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.compose.jetsurvey.R
+import com.example.compose.jetsurvey.service.NotificationDownloadService
+import com.example.compose.jetsurvey.service.SavePhoto
 import com.example.compose.jetsurvey.survey.QuestionWrapper
+import com.example.compose.jetsurvey.survey.encodeSpacesToUrl
 import com.example.compose.jetsurvey.theme.JetsurveyTheme
 
 @Composable
@@ -64,6 +69,7 @@ fun PhotoQuestion(
     onPhotoTaken: (Uri) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var context = LocalContext.current
     val hasPhoto = imageUri != null
     val iconResource = if (hasPhoto) {
         Icons.Filled.SwapHoriz
@@ -88,8 +94,10 @@ fun PhotoQuestion(
 
         OutlinedButton(
             onClick = {
-                newImageUri = getNewImageUri()
-                cameraLauncher.launch(newImageUri)
+                val intent = Intent(context, SavePhoto::class.java)
+                context.startService(intent)
+                val serviceIntent = Intent(context, NotificationDownloadService::class.java)
+                ContextCompat.startForegroundService(context, serviceIntent)
             },
             shape = MaterialTheme.shapes.small,
             contentPadding = PaddingValues()

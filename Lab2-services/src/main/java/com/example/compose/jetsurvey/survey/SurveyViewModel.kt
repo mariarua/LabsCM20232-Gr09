@@ -34,7 +34,7 @@ class SurveyViewModel(
         SurveyQuestion.SUPERHERO,
         SurveyQuestion.LAST_TAKEAWAY,
         SurveyQuestion.TAKE_SELFIE,
-        SurveyQuestion.FEELING_ABOUT_SELFIES,
+        //SurveyQuestion.FEELING_ABOUT_SELFIES,
     )
 
     private var questionIndex = 0
@@ -141,7 +141,7 @@ class SurveyViewModel(
             SurveyQuestion.SUPERHERO -> _superheroResponse.value != null
             SurveyQuestion.LAST_TAKEAWAY -> _takeawayResponse.value != null
             SurveyQuestion.TAKE_SELFIE -> _selfieUri.value != null
-            SurveyQuestion.FEELING_ABOUT_SELFIES -> _feelingAboutSelfiesResponse.value != null
+            //SurveyQuestion.FEELING_ABOUT_SELFIES -> _feelingAboutSelfiesResponse.value != null
 
         }
     }
@@ -174,7 +174,7 @@ enum class SurveyQuestion {
     SUPERHERO,
     LAST_TAKEAWAY,
     TAKE_SELFIE,
-    FEELING_ABOUT_SELFIES,
+    //FEELING_ABOUT_SELFIES,
 }
 
 data class SurveyScreenData(
